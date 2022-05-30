@@ -7,7 +7,6 @@ import {
     Th,
     Td,
     TableContainer,
-    Container,
     Flex,
     Button,
     Box,
@@ -20,17 +19,19 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import data from './data';
 import { getData, sort } from '../../redux/action';
 
 
 export const Home = () => {
     const [ searchValue, setSearchValue ] = useState('');
     const dispatch = useDispatch();
+
+    //fetching data from redux store
     const data = useSelector(store => store.storeData);
 
-    // console.log('data', data);
 
+
+    // get data from server and store in redux
     const getProduct = async () => {
         const response = await fetch(
             "https://myfake-json-server.herokuapp.com/data"
@@ -40,6 +41,8 @@ export const Home = () => {
         // console.log('data', data);
     };
 
+
+    // Delete function
     const handleDelete = (e) => {
         console.log('e', e.target.value);
         let id = e.target.value;
@@ -47,15 +50,15 @@ export const Home = () => {
             method: "DELETE",
         });
         getProduct();
-    }
+    };
 
 
     useEffect(() => {
         getProduct();
-    }, [  ]);
+    }, []);
 
 
-    
+
 
     return (
         <Box w='60%' m='20px auto'>
@@ -66,7 +69,7 @@ export const Home = () => {
                         Sort by Populations
                     </MenuButton>
                     <MenuList minWidth='240px'>
-                        <MenuOptionGroup defaultValue='asc' title='Order' type='radio' onChange={ (e) => { dispatch(sort(e)) } }>
+                        <MenuOptionGroup defaultValue='asc' title='Order' type='radio' onChange={ (e) => { dispatch(sort(e)); } }>
                             <MenuItemOption value='asc'>Ascending</MenuItemOption>
                             <MenuItemOption value='desc'>Descending</MenuItemOption>
                         </MenuOptionGroup>
@@ -93,7 +96,7 @@ export const Home = () => {
                                 <Td>{ item.city }</Td>
                                 <Td isNumeric>{ item.population }</Td>
                                 <Td>Edit</Td>
-                                <Button value={item.id} onClick={ handleDelete} >Delete</Button>
+                                <Button value={ item.id } onClick={ handleDelete } >Delete</Button>
                             </Tr>
                         )) }
                     </Tbody>

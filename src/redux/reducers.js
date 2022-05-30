@@ -26,24 +26,17 @@ export const reducer = (state = initialState, { type, payload }) => {
             if (payload === "desc") {
                 return {
                     ...state,
-                    storeData: [ ...state.storeData ].sort((a, b) => a.population < b.population ? 1 : a.population  > b.population ? -1 : 0)
+                    storeData: [ ...state.storeData ].sort((a, b) => a.population < b.population ? 1 : a.population > b.population ? -1 : 0)
                 };
             }
             else {
                 return {
                     ...state,
-                    storeData: [ ...state.storeData ].sort((a, b) => a.population > b.population ? 1 : a.population  < b.population  ? -1 : 0)
+                    storeData: [ ...state.storeData ].sort((a, b) => a.population > b.population ? 1 : a.population < b.population ? -1 : 0)
                 };
             }
 
         }
-
-        // case REMOVE_DATA: {
-        //     return {
-        //         ...state,
-        //         storeData: [ ...state ].filter((item) => item.id !== payload)
-        //     };
-        // }
         default:
             return state;
 

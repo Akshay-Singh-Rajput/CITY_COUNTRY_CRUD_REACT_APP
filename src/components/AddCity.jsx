@@ -28,6 +28,8 @@ export const AddCity = () => {
         });
     };
 
+
+    // Add data to server
     const handleSubmit = () => {
         fetch("https://myfake-json-server.herokuapp.com/data", {
             method: "POST",
