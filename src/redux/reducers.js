@@ -23,7 +23,7 @@ export const reducer = (state = initialState, { type, payload }) => {
 
         case SORT: {
             console.log("state", payload);
-            if (payload === "asc") {
+            if (payload === "desc") {
                 return {
                     ...state,
                     storeData: [ ...state.storeData ].sort((a, b) => a.population < b.population ? 1 : a.population  > b.population ? -1 : 0)
